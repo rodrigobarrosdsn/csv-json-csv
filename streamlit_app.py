@@ -64,5 +64,18 @@ with col2:
     st.page_link("pages/4_🆔_GUID_UUID.py", label="Abrir GUID/UUID", icon="🆔")
 
 st.divider()
+
+col3, _ = st.columns(2)
+with col3:
+    st.markdown(
+        """
+        ### 🖼️ Resize Image
+        Redimensione imagens **PNG, JPG e WebP** por porcentagem ou
+        dimensão personalizada, com preview e download direto.
+        """
+    )
+    st.page_link("pages/5_🖼️_Resize_Image.py", label="Abrir Resize Image", icon="🖼️")
+
+st.divider()
 st.caption("Dev Backend Utilities • Feito com Streamlit")
 

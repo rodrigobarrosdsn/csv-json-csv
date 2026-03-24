@@ -5,6 +5,8 @@ import hashlib
 import hmac
 import struct
 import time
+import qrcode
+import io
 
 
 st.set_page_config(page_title="Dev Utils - Secret MFA", page_icon="🔐", layout="wide")
@@ -114,6 +116,27 @@ with col_output:
                     st.caption("⚠️ Este é um preview. Use seu app MFA para códigos reais.")
                 except Exception:
                     st.warning("Não foi possível gerar o TOTP para este secret.")
+
+            # QR Code para configurar app MFA
+            with st.expander("📱 QR Code para MFA", expanded=True):
+                issuer = st.text_input(
+                    "Emissor (opcional)",
+                    value="DevUtils",
+                    key="mfa_issuer",
+                )
+                account = st.text_input(
+                    "Conta/email (opcional)",
+                    value="user@example.com",
+                    key="mfa_account",
+                )
+                otpauth_uri = (
+                    f"otpauth://totp/{issuer}:{account}"
+                    f"?secret={base32_no_pad}&issuer={issuer}&algorithm=SHA1&digits=6&period=30"
+                )
+                qr_img = qrcode.make(otpauth_uri)
+                buf = io.BytesIO()
+                qr_img.save(buf, format="PNG")
+                st.image(buf.getvalue(), caption="Escaneie com seu app MFA", width=250)
 
         except (binascii.Error, ValueError) as e:
             st.error(f"❌ Secret inválido para o formato {input_format}.")
