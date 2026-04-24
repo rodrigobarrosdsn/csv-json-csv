@@ -65,7 +65,7 @@ with col2:
 
 st.divider()
 
-col3, _ = st.columns(2)
+col3, col4 = st.columns(2)
 with col3:
     st.markdown(
         """
@@ -75,6 +75,16 @@ with col3:
         """
     )
     st.page_link("pages/5_🖼️_Resize_Image.py", label="Abrir Resize Image", icon="🖼️")
+
+with col4:
+    st.markdown(
+        """
+        ### 🎙️ Whisperer
+        Transcreva arquivos de áudio (**WAV, MP3, OGG, M4A, FLAC, WebM**)
+        usando o modelo Whisper AI. Suporte a múltiplos arquivos e download das transcrições.
+        """
+    )
+    st.page_link("pages/6_🎙️_Whisperer.py", label="Abrir Whisperer", icon="🎙️")
 
 st.divider()
 st.caption("Dev Backend Utilities • Feito com Streamlit")
